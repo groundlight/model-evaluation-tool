@@ -77,3 +77,15 @@ poetry run python evaluate-accuracy.py --detector-id YOUR_DETECTOR_ID --dataset 
 ```
 
 Optionally, set the `--delay` argument to prevent going over the throttling limit of your account.
+
+The evaluation script will output the following information:
+
+```
+Number of Correct ML Predictions
+Average Confidence
+False Positives
+False Negatives
+Accuracy
+Precision
+Recall
+```
