@@ -36,7 +36,7 @@ def upload_image(gl: Groundlight, detector: Detector, image: PIL) -> BinaryClass
     if image.format != "JPEG":
         image = image.convert("RGB")
 
-    # Use ask_ml to upload the image and then add the label to the image query
+    # Use ask_ml to upload the image and then return the result
     iq = gl.ask_ml(detector=detector, image=image)
     return iq.result
 
