@@ -38,19 +38,20 @@ def upload_image(gl: Groundlight, detector: Detector, image: PIL, label: str) ->
         raise ValueError(f"Invalid label: {label}, must be 'YES' or 'NO'.")
 
     # Use ask_ml to upload the image and then add the label to the image query
-    iq = gl.ask_ml(detector=detector, image=image)
+    iq = gl.ask_async(detector=detector, image=image)
     gl.add_label(image_query=iq, label=label)
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Upload images with labels to a detector.")
-    parser.add_argument("--detector-id", type=str, required=True, help="The ID of the detector to upload to.")
+    parser.add_argument("--detector-name", type=str, required=True, help="The name of the detector.")
+    parser.add_argument("--detector-query", type=str, required=True, help="The query of the detector.")
     parser.add_argument("--dataset", type=str, required=True, help="The folder containing the dataset.csv and images folder")
     parser.add_argument("--delay", type=float, required=False, default=0.1, help="The delay between uploads.")
     args = parser.parse_args()
 
     gl = Groundlight()
-    detector = gl.get_detector(args.detector_id)
+    detector = gl.get_or_create_detector(name=args.detector_name, query=args.detector_query)
 
     # Load the dataset from the CSV file and images from the images folder
     # The CSV file should have two columns: image_name and label (YES/NO)
