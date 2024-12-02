@@ -1,5 +1,7 @@
 # Model Evaluation Tool
-A simple tool for evaluating the performance of your Groundlight Binary ML model
+A simple tool for evaluating the performance of your Groundlight Binary ML model.
+
+This script provides a simple way for users to do an independent evaluation of the ML's performance. Note that this is not the recommended way of using our service, as this only evaluates ML performance and not the combined performance of our ML + escalation system. However, the accuracy results from `evaluate.py` should fall within the bounds of Projected ML Accuracy shown on our website, given that the train and evaluation dataset that the user provided are well randomized.
 
 ## Installation
 
@@ -63,7 +65,7 @@ The corresponding image file should be placed inside the `images` folder.
 To train the ML model for a detector, simply run the script `label-upload.py` with the following arguments:
 
 ```bash
-poetry run python label-upload.py --detector-id YOUR_DETECTOR_ID --dataset PATH_TO_DATASET_TRAIN_FOLDER
+poetry run python label-upload.py --detector-name NAME_OF_THE_DETECTOR --detector-query QUERY_OF_THE_DETECTOR --dataset PATH_TO_DATASET_TRAIN_FOLDER
 ```
 
 Optionally, set the `--delay` argument to prevent going over the throttling limit of your account.
