@@ -60,11 +60,12 @@ if __name__ == "__main__":
     logger.info(f"Evaluating {len(dataset)} images on detector {detector.name} with delay {args.delay}.")
 
     # Record the number of correct predictions
-    # Also record the number of false positives and false negatives
-    correct = 0
-    total_processed = 0
+    # Also record the number of TP, TN, FP, FN for calculating balanced accuracy, precision, and recall
+    true_positives = 0
+    true_negatives = 0
     false_positives = 0
     false_negatives = 0
+    total_processed = 0
     average_confidence = 0
 
     for image_name, label in tqdm(dataset.values):
@@ -79,11 +80,13 @@ if __name__ == "__main__":
         image = PIL.Image.open(os.path.join(args.dataset, "images", image_name))
         result = upload_image(gl=gl, detector=detector, image=image)
 
-        if result.label == label:
-            correct += 1
-        elif result.label  == "YES" and label == "NO":
+        if result.label == "YES" and label == "YES":
+            true_positives += 1
+        elif result.label == "NO" and label == "NO":
+            true_negatives += 1
+        elif result.label == "YES" and label == "NO":
             false_positives += 1
-        elif result.label  == "NO" and label == "YES":
+        elif result.label == "NO" and label == "YES":
             false_negatives += 1
 
         average_confidence += result.confidence
@@ -92,15 +95,12 @@ if __name__ == "__main__":
         time.sleep(args.delay)
 
     # Calculate the accuracy, precision, and recall
-    accuracy = correct / total_processed if total_processed > 0 else 0
-    precision = correct / (correct + false_positives) if correct + false_positives > 0 else 0
-    recall = correct / (correct + false_negatives) if correct + false_negatives > 0 else 0
+    balanced_accuracy = (true_positives / (true_positives + false_negatives) + true_negatives / (true_negatives + false_positives)) / 2
+    precision = true_positives / (true_positives + false_positives)
+    recall = true_positives / (true_positives + false_negatives)
 
     logger.info(f"Processed {total_processed} images.")
-    logger.info(f"Correct: {correct}/{total_processed}")
     logger.info(f"Average Confidence: {average_confidence / total_processed:.2f}")
-    logger.info(f"False Positives: {false_positives}")
-    logger.info(f"False Negatives: {false_negatives}")
-    logger.info(f"Accuracy: {accuracy:.2f}")
+    logger.info(f"Balanced Accuracy: {balanced_accuracy:.2f}")
     logger.info(f"Precision: {precision:.2f}")
     logger.info(f"Recall: {recall:.2f}")
