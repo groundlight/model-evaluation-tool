@@ -5,7 +5,7 @@ This script provides a simple way for users to do an independent evaluation of t
 
 ## Installation
 
-The dependencies for this script can be installed through either using poetry (recommended) or `requirements.txt`.
+The dependencies for this script can be installed by either using poetry (recommended) or `requirements.txt`.
 
 Using poetry
 
@@ -34,7 +34,7 @@ export GROUNDLIIGHT_API_TOKEN="YOUR_API_TOKEN"
 
 ### Formatting Dataset
 
-To train or evaluate the ML model with your custom dataset, structure your dataset into the following format:
+This script assumes your custom image dataset is structured in the following format:
 
 ```bash
 └── dataset
@@ -62,10 +62,10 @@ The corresponding image file should be placed inside the `images` folder.
 
 ### Training the Detector
 
-To train the ML model for a detector, simply run the script `label-upload.py` with the following arguments:
+To train the ML model for a detector, simply run the script `train.py` with the following arguments:
 
 ```bash
-poetry run python label-upload.py --detector-name NAME_OF_THE_DETECTOR --detector-query QUERY_OF_THE_DETECTOR --dataset PATH_TO_DATASET_TRAIN_FOLDER
+poetry run python train.py --detector-name NAME_OF_THE_DETECTOR --detector-query QUERY_OF_THE_DETECTOR --dataset PATH_TO_DATASET_TRAIN_FOLDER
 ```
 
 Optionally, set the `--delay` argument to prevent going over the throttling limit of your account.
@@ -75,7 +75,7 @@ Optionally, set the `--delay` argument to prevent going over the throttling limi
 To evaluate the ML model performance for a detector, simply run the script `evaluate-accuracy.py` with the following arguments:
 
 ```bash
-poetry run python evaluate-accuracy.py --detector-id YOUR_DETECTOR_ID --dataset PATH_TO_DATASET_TEST_FOLDER
+poetry run python evaluate.py --detector-id YOUR_DETECTOR_ID --dataset PATH_TO_DATASET_TEST_FOLDER
 ```
 
 Optionally, set the `--delay` argument to prevent going over the throttling limit of your account.
@@ -85,9 +85,7 @@ The evaluation script will output the following information:
 ```
 Number of Correct ML Predictions
 Average Confidence
-False Positives
-False Negatives
-Accuracy
+Balanced Accuracy
 Precision
 Recall
 ```
