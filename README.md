@@ -1,7 +1,7 @@
 # Model Evaluation Tool
 A simple tool for evaluating the performance of your Groundlight Binary ML model.
 
-This script provides a simple way for users to do an independent evaluation of the ML's performance. Note that this is not the recommended way of using our service, as this only evaluates ML performance and not the combined performance of our ML + escalation system. However, the accuracy results from `evaluate.py` should fall within the bounds of Projected ML Accuracy shown on our website, given that the train and evaluation dataset that the user provided are well randomized.
+This script provides a simple way for users to do an independent evaluation of the ML's performance. Note that this is not the recommended way of using our service, as this only evaluates ML performance and not the combined performance of our ML + escalation system. However, the balanced accuracy results from `evaluate.py` should fall within the bounds of Projected ML Accuracy shown on our website, if the train and evaluation dataset that the user provided are well randomized.
 
 ## Installation
 
