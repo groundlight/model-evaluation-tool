@@ -37,7 +37,7 @@ def upload_image(gl: Groundlight, detector: Detector, image: PIL, label: str) ->
     if label not in ["YES", "NO"]:
         raise ValueError(f"Invalid label: {label}, must be 'YES' or 'NO'.")
 
-    # Use ask_ml to upload the image and then add the label to the image query
+    # Use ask_async to upload the image and then add the label to the image query
     iq = gl.ask_async(detector=detector, image=image)
     gl.add_label(image_query=iq, label=label)
 

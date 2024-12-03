@@ -72,7 +72,7 @@ Optionally, set the `--delay` argument to prevent going over the throttling limi
 
 ### Evaluate the Detector
 
-To evaluate the ML model performance for a detector, simply run the script `evaluate-accuracy.py` with the following arguments:
+To evaluate the ML model performance for a detector, simply run the script `evaluate.py` with the following arguments:
 
 ```bash
 poetry run python evaluate.py --detector-id YOUR_DETECTOR_ID --dataset PATH_TO_DATASET_TEST_FOLDER
