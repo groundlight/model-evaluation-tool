@@ -1,7 +1,9 @@
 # Model Evaluation Tool
-A simple tool for evaluating the performance of your Groundlight Binary ML model.
+A simple tool for manually evaluating the performance of your Groundlight Binary ML model.
 
-This script provides a simple way for users to do an independent evaluation of the ML's performance. Note that this is not the recommended way of using our service, as this only evaluates ML performance and not the combined performance of our ML + escalation system. However, the balanced accuracy results from `evaluate.py` should fall within the bounds of Projected ML Accuracy shown on our website, if the train and evaluation dataset that the user provided are well randomized.
+This script provides a simple way for you to do an independent evaluation of your Groundlight model's ML performance. Note that this is not the recommended way of using our service, as this only evaluates ML performance and not the combined performance of our ML + escalation system. However, the balanced accuracy results from `evaluate.py` should fall within the bounds of Projected ML Accuracy shown on our website, if the train and evaluation dataset that the user provided are well randomized.
+
+Note this tool only works for **binary detectors**.
 
 ## Installation
 
@@ -72,6 +74,8 @@ Optionally, set the `--delay` argument to prevent going over the throttling limi
 
 ### Evaluate the Detector
 
+Before evaluating the ML model, you should wait a few minutes for the model to be fully trained.  Small models generally train very quickly, but to be sure your model is fully trained, you should wait 10 or 15 minutes after submitting the training images.
+
 To evaluate the ML model performance for a detector, simply run the script `evaluate.py` with the following arguments:
 
 ```bash
@@ -89,3 +93,7 @@ Balanced Accuracy
 Precision
 Recall
 ```
+
+## Questions?
+
+If you have any questions or feedback about this tool, feel free to reach out to your Groundlight contact, over email at support@groundlight.ai, in your dedicated Slack channel, or using the chat widget in the bottom-right corner of the dashboard.
